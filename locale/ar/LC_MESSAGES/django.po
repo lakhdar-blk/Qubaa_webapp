@@ -1,0 +1,875 @@
+# Arabic translations for the Qubaa Mosque announcements site.
+# Compiled with scripts/compile_po.py (no gettext binaries required).
+msgid ""
+msgstr ""
+"Project-Id-Version: Qubaa Mosque 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "Arabic"
+msgstr "العربية"
+
+msgid "English"
+msgstr "الإنجليزية"
+
+msgid "A house of Allah, at the service of people."
+msgstr "بيت من بيوت الله، في خدمة الناس."
+
+msgid "A mosque at the service of its community, publishing needs with discretion and trust."
+msgstr "مسجد في خدمة مجتمعه، ينشر الحاجات بأمانة وسرية."
+
+msgid "A need to share?"
+msgstr "هل لديك حاجة تودّ مشاركتها؟"
+
+msgid "A person"
+msgstr "شخص"
+
+msgid "About the mosque"
+msgstr "عن المسجد"
+
+msgid "About us"
+msgstr "من نحن"
+
+msgid "Admin"
+msgstr "الإدارة"
+
+msgid "Administration"
+msgstr "الإدارة"
+
+msgid "Algerian Dinar (DZD)"
+msgstr "دينار جزائري (DZD)"
+
+msgid "All categories"
+msgstr "كل الفئات"
+
+msgid "All rights reserved."
+msgstr "جميع الحقوق محفوظة."
+
+msgid "All statuses"
+msgstr "كل الحالات"
+
+msgid "All types"
+msgstr "كل الأنواع"
+
+msgid "Amount already collected, if any."
+msgstr "المبلغ المُحصّل، إن وُجد."
+
+msgid "Announcement #%(pk)s"
+msgstr "الإعلان رقم %(pk)s"
+
+msgid "Announcements"
+msgstr "الإعلانات"
+
+msgid "Announcements may concern a family in need, a sick person, a student, an orphan, or the maintenance of the mosque itself. Every request is published with the consent of the people concerned and with the greatest discretion."
+msgstr "قد تتعلق الإعلانات بعائلة محتاجة، أو شخص مريض، أو طالب، أو يتيم، أو بصيانة المسجد نفسه. يُنشر كل طلب بموافقة الأشخاص المعنيين وبأكبر قدر من السرية."
+
+msgid "Announcements of needs published by the mosque, to help people and maintain the house of Allah."
+msgstr "إعلانات الحاجات التي ينشرها المسجد لمساعدة الناس وصيانة بيت الله."
+
+msgid "Back to announcements"
+msgstr "العودة إلى الإعلانات"
+
+msgid "Back to home"
+msgstr "العودة إلى الرئيسية"
+
+msgid "Beneficiary"
+msgstr "المستفيد"
+
+msgid "Beneficiary & location"
+msgstr "المستفيد والموقع"
+
+msgid "Breadcrumb"
+msgstr "مسار التنقل"
+
+msgid "British Pound (GBP)"
+msgstr "جنيه إسترليني (GBP)"
+
+msgid "Browse announcements"
+msgstr "تصفّح الإعلانات"
+
+msgid "Browse the announcements, choose a need that touches you, and contact the mosque directly by phone or email. Our team will guide you and connect you with the beneficiary in a safe and respectful way."
+msgstr "تصفّح الإعلانات، واختر حاجة تلامس قلبك، ثم تواصل مع المسجد مباشرة عبر الهاتف أو البريد الإلكتروني. سيرشدك فريقنا ويصلك بالمستفيد بطريقة آمنة ومحترمة."
+
+msgid "Browse the needs published by the mosque and find a way to help."
+msgstr "تصفّح الحاجات التي ينشرها المسجد وابحث عن طريقة للمساعدة."
+
+msgid "Built with care for the community."
+msgstr "صُنع بعناية لخدمة المجتمع."
+
+msgid "Category"
+msgstr "الفئة"
+
+msgid "Closed"
+msgstr "مغلق"
+
+msgid "Clothing"
+msgstr "كسوة"
+
+msgid "Community solidarity"
+msgstr "تضامن المجتمع"
+
+msgid "Contact"
+msgstr "تواصل"
+
+msgid "Contact details are not available yet."
+msgstr "بيانات التواصل غير متاحة بعد."
+
+msgid "Contact details will be published soon."
+msgstr "ستُنشر بيانات التواصل قريبًا."
+
+msgid "Contact the mosque"
+msgstr "تواصل مع المسجد"
+
+msgid "Contact the mosque to offer help, with complete discretion."
+msgstr "تواصل مع المسجد لتقديم المساعدة، بكل سرية."
+
+msgid "Contact us"
+msgstr "تواصل معنا"
+
+msgid "Content"
+msgstr "المحتوى"
+
+msgid "Copied!"
+msgstr "تم النسخ!"
+
+msgid "Copy link"
+msgstr "نسخ الرابط"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Direct contact with the mosque"
+msgstr "تواصل مباشر مع المسجد"
+
+msgid "Discretion"
+msgstr "السرية"
+
+msgid "Each request is verified before publication."
+msgstr "يتم التحقق من كل طلب قبل نشره."
+
+msgid "Education"
+msgstr "تعليم"
+
+msgid "Egyptian Pound (EGP)"
+msgstr "جنيه مصري (EGP)"
+
+msgid "Enter a valid email address."
+msgstr "أدخل بريدًا إلكترونيًا صحيحًا."
+
+msgid "Euro (EUR)"
+msgstr "يورو (EUR)"
+
+msgid "Every announcement is published and verified by the mosque. The mosque does not collect payments online: please contact us directly to offer your help."
+msgstr "كل إعلان يُنشر ويُتحقق منه من طرف المسجد. المسجد لا يجمع التبرعات عبر الإنترنت: يرجى التواصل معنا مباشرة لتقديم المساعدة."
+
+msgid "Explore"
+msgstr "استكشف"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "Food"
+msgstr "طعام"
+
+msgid "For any question or to offer help, contact us directly."
+msgstr "لأي سؤال أو لتقديم المساعدة، تواصل معنا مباشرة."
+
+msgid "Fulfilled"
+msgstr "تمت تلبيته"
+
+msgid "Fulfilled announcements: %(count)s"
+msgstr "الإعلانات التي تمت تلبيتها: %(count)s"
+
+msgid "Fundraising"
+msgstr "جمع المساهمات"
+
+msgid "Get in touch"
+msgstr "تواصل معنا"
+
+msgid "Goal"
+msgstr "الهدف"
+
+msgid "Help is delivered"
+msgstr "المساعدة تصل"
+
+msgid "Helping hands, by the grace of Allah"
+msgstr "أيادٍ تساعد، بفضل الله"
+
+msgid "Helping one another is at the heart of our community."
+msgstr "التعاون على البر من صميم مجتمعنا."
+
+msgid "Hidden announcements: %(count)s"
+msgstr "الإعلانات المخفية: %(count)s"
+
+msgid "Hide selected announcements"
+msgstr "إخفاء الإعلانات المحددة"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "Housing"
+msgstr "سكن"
+
+msgid "How it works"
+msgstr "كيف تعمل المنصة"
+
+msgid "How to help"
+msgstr "كيف تساعد"
+
+msgid "If you or someone you know needs help, contact the mosque. Our team listens and publishes the request with discretion."
+msgstr "إذا كنت أنت أو شخص تعرفه بحاجة إلى مساعدة، فتواصل مع المسجد. فريقنا يستمع وينشر الطلب بكل سرية."
+
+msgid "Key figures"
+msgstr "أرقام أساسية"
+
+msgid "Latest announcements"
+msgstr "آخر الإعلانات"
+
+msgid "Learn about the mosque, its mission and how it publishes needs to serve the community."
+msgstr "تعرّف على المسجد ورسالته وكيف ينشر الحاجات لخدمة المجتمع."
+
+msgid "Learn more about us"
+msgstr "اعرف المزيد عنا"
+
+msgid "Leave empty if no specific amount is needed."
+msgstr "اتركه فارغًا إذا لم تكن هناك حاجة إلى مبلغ محدد."
+
+msgid "Location"
+msgstr "الموقع"
+
+msgid "Main navigation"
+msgstr "التنقل الرئيسي"
+
+msgid "Manage announcements"
+msgstr "إدارة الإعلانات"
+
+msgid "Mark selected announcements as fulfilled"
+msgstr "تعيين الإعلانات المحددة كمُلبّاة"
+
+msgid "Mark selected announcements as open"
+msgstr "تعيين الإعلانات المحددة كمفتوحة"
+
+msgid "Media"
+msgstr "الوسائط"
+
+msgid "Medical"
+msgstr "علاج"
+
+msgid "Menu"
+msgstr "القائمة"
+
+msgid "Moroccan Dirham (MAD)"
+msgstr "درهم مغربي (MAD)"
+
+msgid "Mosque maintenance"
+msgstr "صيانة المسجد"
+
+msgid "Needs for people"
+msgstr "حاجات الأشخاص"
+
+msgid "Needs for the mosque"
+msgstr "حاجات المسجد"
+
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+msgid "No amount requested"
+msgstr "لا يوجد مبلغ مطلوب"
+
+msgid "No announcements found"
+msgstr "لا توجد إعلانات"
+
+msgid "No announcements have been published yet."
+msgstr "لم يُنشر أي إعلان بعد."
+
+msgid "No image"
+msgstr "لا توجد صورة"
+
+msgid "Only published announcements are visible on the website."
+msgstr "تظهر على الموقع الإعلانات المنشورة فقط."
+
+msgid "Open"
+msgstr "مفتوح"
+
+msgid "Open announcements: %(count)s"
+msgstr "الإعلانات المفتوحة: %(count)s"
+
+msgid "Other"
+msgstr "أخرى"
+
+msgid "Other announcements"
+msgstr "إعلانات أخرى"
+
+msgid "Our mission"
+msgstr "رسالتنا"
+
+msgid "Our mosque is a place of prayer, learning and mutual support. Following the teachings of Islam, we believe that helping one another is part of our faith and our duty towards the community."
+msgstr "مسجدنا مكان للصلاة والتعلّم والتكافل. انطلاقًا من تعاليم الإسلام، نؤمن بأن مساعدة بعضنا لبعض جزء من إيماننا وواجبنا تجاه المجتمع."
+
+msgid "Our team publishes verified needs for people or for the mosque itself."
+msgstr "ينشر فريقنا حاجات تم التحقق منها، سواء كانت لأشخاص أو للمسجد نفسه."
+
+msgid "Our values"
+msgstr "قيمنا"
+
+msgid "Page not found"
+msgstr "الصفحة غير موجودة"
+
+msgid "Pagination"
+msgstr "التنقل بين الصفحات"
+
+msgid "Paste a link to an image starting with https://"
+msgstr "الصق رابط صورة يبدأ بـ https://"
+
+msgid "Preview"
+msgstr "معاينة"
+
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+msgid "Progress"
+msgstr "التقدم"
+
+msgid "Provide a description in at least one language."
+msgstr "يرجى تقديم وصف بلغة واحدة على الأقل."
+
+msgid "Provide a title in at least one language."
+msgstr "يرجى تقديم عنوان بلغة واحدة على الأقل."
+
+msgid "Publication"
+msgstr "النشر"
+
+msgid "Publish selected announcements"
+msgstr "نشر الإعلانات المحددة"
+
+msgid "Published announcements: %(count)s"
+msgstr "الإعلانات المنشورة: %(count)s"
+
+msgid "Published needs"
+msgstr "الحاجات المنشورة"
+
+msgid "Published on"
+msgstr "نُشر في"
+
+msgid "Qubaa Mosque"
+msgstr "مسجد قباء"
+
+msgid "Qubaa Mosque Administration"
+msgstr "إدارة مسجد قباء"
+
+msgid "Quran & teaching"
+msgstr "القرآن والتعليم"
+
+msgid "Raised"
+msgstr "تم جمع"
+
+msgid "Ramadan"
+msgstr "رمضان"
+
+msgid "Recent needs"
+msgstr "أحدث الحاجات"
+
+msgid "Remaining"
+msgstr "المتبقي"
+
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+msgid "Saudi Riyal (SAR)"
+msgstr "ريال سعودي (SAR)"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search a need, a city or a name…"
+msgstr "ابحث عن حاجة أو مدينة أو اسم…"
+
+msgid "Share this announcement"
+msgstr "شارك هذا الإعلان"
+
+msgid "Simple and transparent"
+msgstr "بسيطة وشفافة"
+
+msgid "Skip to content"
+msgstr "انتقل إلى المحتوى"
+
+msgid "Solidarity"
+msgstr "التكافل"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Still open"
+msgstr "ما زالت مفتوحة"
+
+msgid "Summary"
+msgstr "ملخص"
+
+msgid "The amount cannot be negative."
+msgstr "لا يمكن أن يكون المبلغ سالبًا."
+
+msgid "The first announcements will appear here as soon as the mosque publishes them."
+msgstr "ستظهر أول الإعلانات هنا بمجرد أن ينشرها المسجد."
+
+msgid "The mosque"
+msgstr "المسجد"
+
+msgid "The mosque does not collect payments through this website. All help is arranged directly with the mosque."
+msgstr "لا يجمع المسجد التبرعات عبر هذا الموقع. تُرتّب كل المساعدات مباشرة مع المسجد."
+
+msgid "The mosque publishes the need"
+msgstr "المسجد ينشر الحاجة"
+
+msgid "The mosque publishes the needs of people and of the house of Allah. Browse the announcements and take part in what is good."
+msgstr "ينشر المسجد حاجات الناس وبيت الله. تصفّح الإعلانات وكن جزءًا من الخير."
+
+msgid "The mosque team is available to listen and to help."
+msgstr "فريق المسجد متاح للاستماع والمساعدة."
+
+msgid "The page you are looking for does not exist or is no longer available."
+msgstr "الصفحة التي تبحث عنها غير موجودة أو لم تعد متاحة."
+
+msgid "This website gives the mosque a simple and transparent way to publish the needs of people and of the house of Allah. Each announcement is reviewed by our team before publication, so that visitors can trust the information they read."
+msgstr "يمنح هذا الموقع المسجد وسيلة بسيطة وشفافة لنشر حاجات الناس وبيت الله. يراجع فريقنا كل إعلان قبل نشره، ليثق الزوار في المعلومات التي يقرؤونها."
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "Trust"
+msgstr "الأمانة"
+
+msgid "Trust and discretion guide every announcement we publish. The dignity of the people we help always comes first."
+msgstr "الأمانة والسرية توجّهان كل إعلان ننشره. كرامة من نساعدهم تأتي دائمًا أولًا."
+
+msgid "Try different keywords or filters, or browse all announcements."
+msgstr "جرّب كلمات أو عوامل تصفية مختلفة، أو تصفّح كل الإعلانات."
+
+msgid "Tunisian Dinar (TND)"
+msgstr "دينار تونسي (TND)"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "UAE Dirham (AED)"
+msgstr "درهم إماراتي (AED)"
+
+msgid "US Dollar (USD)"
+msgstr "دولار أمريكي (USD)"
+
+msgid "Verified by the mosque"
+msgstr "موثّق من المسجد"
+
+msgid "View all announcements"
+msgstr "عرض كل الإعلانات"
+
+msgid "View details"
+msgstr "عرض التفاصيل"
+
+msgid "View this page in Arabic"
+msgstr "عرض هذه الصفحة بالعربية"
+
+msgid "View this page in English"
+msgstr "عرض هذه الصفحة بالإنجليزية"
+
+msgid "Visitors browse the announcements with all the useful details."
+msgstr "يتصفّح الزوار الإعلانات مع كل التفاصيل المفيدة."
+
+msgid "Visitors discover"
+msgstr "الزوار يتعرّفون"
+
+msgid "We protect the dignity and privacy of beneficiaries."
+msgstr "نحمي كرامة المستفيدين وخصوصيتهم."
+
+msgid "What we publish"
+msgstr "ما ننشره"
+
+msgid "Widows & orphans"
+msgstr "أرامل وأيتام"
+
+msgid "You may also help"
+msgstr "قد تساعد أيضًا"
+
+msgid "amount raised"
+msgstr "المبلغ المُحصّل"
+
+msgid "announcement"
+msgstr "إعلان"
+
+msgid "announcements"
+msgstr "الإعلانات"
+
+msgid "beneficiary name"
+msgstr "اسم المستفيد"
+
+msgid "category"
+msgstr "الفئة"
+
+msgid "city"
+msgstr "المدينة"
+
+msgid "contact address"
+msgstr "عنوان المسؤول عن التواصل"
+
+msgid "Address of the person responsible for this announcement. Leave empty to show the mosque address instead."
+msgstr "عنوان الشخص المسؤول عن هذا الإعلان. اتركه فارغًا لعرض عنوان المسجد بدلًا منه."
+
+msgid "contact email"
+msgstr "البريد الإلكتروني للتواصل"
+
+msgid "contact name"
+msgstr "اسم المسؤول عن التواصل"
+
+msgid "contact phone"
+msgstr "هاتف التواصل"
+
+msgid "country"
+msgstr "البلد"
+
+msgid "created at"
+msgstr "تاريخ الإنشاء"
+
+msgid "created by"
+msgstr "أنشأه"
+
+msgid "currency"
+msgstr "العملة"
+
+msgid "description (Arabic)"
+msgstr "الوصف (بالعربية)"
+
+msgid "description (English)"
+msgstr "الوصف (بالإنجليزية)"
+
+msgid "goal amount"
+msgstr "المبلغ المطلوب"
+
+msgid "image URL"
+msgstr "رابط الصورة"
+
+msgid "published"
+msgstr "منشور"
+
+msgid "status"
+msgstr "الحالة"
+
+msgid "title (Arabic)"
+msgstr "العنوان (بالعربية)"
+
+msgid "title (English)"
+msgstr "العنوان (بالإنجليزية)"
+
+msgid "type"
+msgstr "النوع"
+
+msgid "updated at"
+msgstr "تاريخ التحديث"
+
+msgid "%(counter)s announcement"
+msgid_plural "%(counter)s announcements"
+msgstr[0] "لا توجد إعلانات"
+msgstr[1] "إعلان واحد"
+msgstr[2] "إعلانان"
+msgstr[3] "%(counter)s إعلانات"
+msgstr[4] "%(counter)s إعلانًا"
+msgstr[5] "%(counter)s إعلان"
+
+msgid "Accounts & settings"
+msgstr "الحسابات والإعدادات"
+
+msgid "Action"
+msgstr "إجراء"
+
+msgid "Actions"
+msgstr "الإجراءات"
+
+msgid "All announcements"
+msgstr "جميع الإعلانات"
+
+msgid "Announcement"
+msgstr "الإعلان"
+
+msgid "Announcement created."
+msgstr "تم إنشاء الإعلان."
+
+msgid "Announcement deleted."
+msgstr "تم حذف الإعلان."
+
+msgid "Announcement hidden from the public site."
+msgstr "تم إخفاء الإعلان من الموقع العام."
+
+msgid "Announcement published."
+msgstr "تم نشر الإعلان."
+
+msgid "Announcement saved."
+msgstr "تم حفظ الإعلان."
+
+msgid "Announcements hidden: %(count)s"
+msgstr "الإعلانات المخفية: %(count)s"
+
+msgid "Announcements marked as fulfilled: %(count)s"
+msgstr "الإعلانات المعلَّمة كمُنجَزة: %(count)s"
+
+msgid "Announcements marked as open: %(count)s"
+msgstr "الإعلانات المعلَّمة كمفتوحة: %(count)s"
+
+msgid "Announcements published: %(count)s"
+msgstr "الإعلانات المنشورة: %(count)s"
+
+msgid "Apply"
+msgstr "تطبيق"
+
+msgid "Arabic and English in one form"
+msgstr "العربية والإنجليزية في نموذج واحد"
+
+msgid "Back to the public site"
+msgstr "العودة إلى الموقع العام"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Choose a password you do not use anywhere else."
+msgstr "اختر كلمة مرور لا تستخدمها في أي مكان آخر."
+
+msgid "Choose an action"
+msgstr "اختر إجراءً"
+
+msgid "Create your first announcement to show it on the public site."
+msgstr "أنشئ إعلانك الأول لعرضه على الموقع العام."
+
+msgid "Dashboard navigation"
+msgstr "التنقل في لوحة التحكم"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete this announcement"
+msgstr "حذف هذا الإعلان"
+
+msgid "Delete this announcement? This cannot be undone."
+msgstr "هل تريد حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء."
+
+msgid "Dismiss"
+msgstr "إغلاق"
+
+msgid "Draft"
+msgstr "مسودة"
+
+msgid "Drafts"
+msgstr "المسودات"
+
+msgid "Drafts only"
+msgstr "المسودات فقط"
+
+msgid "Drafts stay private until you publish them."
+msgstr "تبقى المسودات خاصة حتى تنشرها."
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit announcement"
+msgstr "تعديل الإعلان"
+
+msgid "Email or username"
+msgstr "البريد الإلكتروني أو اسم المستخدم"
+
+msgid "For people"
+msgstr "للأشخاص"
+
+msgid "For the mosque"
+msgstr "للمسجد"
+
+msgid "Hide from the public site"
+msgstr "إخفاء من الموقع العام"
+
+msgid "Image"
+msgstr "الصورة"
+
+msgid "Last update"
+msgstr "آخر تحديث"
+
+msgid "Latest updates"
+msgstr "أحدث التحديثات"
+
+msgid "Leave empty to show the Arabic description on the English site too."
+msgstr "اتركه فارغًا لعرض الوصف العربي على الموقع الإنجليزي أيضًا."
+
+msgid "Leave empty to show the Arabic title on the English site too."
+msgstr "اتركه فارغًا لعرض العنوان العربي على الموقع الإنجليزي أيضًا."
+
+msgid "Leave empty to show the English description on the Arabic site too."
+msgstr "اتركه فارغًا لعرض الوصف الإنجليزي على الموقع العربي أيضًا."
+
+msgid "Leave empty to show the English title on the Arabic site too."
+msgstr "اتركه فارغًا لعرض العنوان الإنجليزي على الموقع العربي أيضًا."
+
+msgid "Leave the goal empty if no amount is needed."
+msgstr "اترك المبلغ المطلوب فارغًا إذا لم تكن هناك حاجة إلى مبلغ."
+
+msgid "Mark as fulfilled"
+msgstr "تعليم كمُنجَز"
+
+msgid "Mark as open"
+msgstr "تعليم كمفتوح"
+
+msgid "Mosque dashboard"
+msgstr "لوحة تحكم المسجد"
+
+msgid "Needs by type"
+msgstr "الاحتياجات حسب النوع"
+
+msgid "New announcement"
+msgstr "إعلان جديد"
+
+msgid "No announcements yet"
+msgstr "لا توجد إعلانات بعد"
+
+msgid "No fundraising amounts have been recorded yet."
+msgstr "لم تُسجَّل أي مبالغ جمع تبرعات بعد."
+
+msgid "Only a superuser can delete an announcement."
+msgstr "يمكن للمدير الأعلى فقط حذف الإعلان."
+
+msgid "Overview"
+msgstr "نظرة عامة"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Paste a link to a photo hosted elsewhere (no upload needed)."
+msgstr "الصق رابط صورة مستضافة في مكان آخر (لا حاجة إلى رفعها)."
+
+msgid "Public site"
+msgstr "الموقع العام"
+
+msgid "Publish"
+msgstr "نشر"
+
+msgid "Publish a need in a few minutes"
+msgstr "انشر احتياجًا في دقائق"
+
+msgid "Publish on the public site"
+msgstr "النشر على الموقع العام"
+
+msgid "Publish the needs of people and of the mosque, follow the fundraising, and keep the community informed."
+msgstr "انشر احتياجات الأشخاص والمسجد، وتابع جمع التبرعات، وأبقِ المجتمع على اطلاع."
+
+msgid "Published"
+msgstr "منشور"
+
+msgid "Published only"
+msgstr "المنشورة فقط"
+
+msgid "Reset filters"
+msgstr "إعادة تعيين عوامل التصفية"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Save and add another"
+msgstr "حفظ وإضافة آخر"
+
+msgid "Search a title, a city or a name…"
+msgstr "ابحث عن عنوان أو مدينة أو اسم…"
+
+msgid "Select"
+msgstr "تحديد"
+
+msgid "Select all"
+msgstr "تحديد الكل"
+
+msgid "Select at least one announcement."
+msgstr "حدِّد إعلانًا واحدًا على الأقل."
+
+msgid "Shown on the announcement page. Empty fields fall back to the mosque contact details."
+msgstr "تظهر في صفحة الإعلان. تعود الحقول الفارغة إلى بيانات الاتصال بالمسجد."
+
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+msgid "Staff access"
+msgstr "دخول الفريق"
+
+msgid "The announcements changed most recently."
+msgstr "الإعلانات التي عُدّلت مؤخرًا."
+
+msgid "The email or password is incorrect. Please try again."
+msgstr "البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى."
+
+msgid "This account is disabled."
+msgstr "هذا الحساب معطَّل."
+
+msgid "This action is permanent and removes the announcement from the public site."
+msgstr "هذا الإجراء نهائي ويزيل الإعلان من الموقع العام."
+
+msgid "This area is reserved for the mosque team."
+msgstr "هذه المنطقة مخصصة لفريق المسجد."
+
+msgid "Totals by currency."
+msgstr "الإجماليات حسب العملة."
+
+msgid "Trust and discretion, at the service of the community."
+msgstr "ثقة وتكتّم في خدمة المجتمع."
+
+msgid "Try different keywords or filters, or create a new announcement."
+msgstr "جرّب كلمات مفتاحية أو عوامل تصفية أخرى، أو أنشئ إعلانًا جديدًا."
+
+msgid "Uncheck to keep this announcement as a draft."
+msgstr "أزل التحديد لإبقاء هذا الإعلان كمسودة."
+
+msgid "Unknown action."
+msgstr "إجراء غير معروف."
+
+msgid "Update the progress of each fundraiser"
+msgstr "تحديث تقدم كل حملة تبرع"
+
+msgid "Update this amount to keep the progress bar accurate."
+msgstr "حدِّث هذا المبلغ للحفاظ على دقة شريط التقدم."
+
+msgid "View all"
+msgstr "عرض الكل"
+
+msgid "View on the public site"
+msgstr "عرض على الموقع العام"
+
+msgid "View the dashboard in Arabic"
+msgstr "عرض لوحة التحكم بالعربية"
+
+msgid "View the dashboard in English"
+msgstr "عرض لوحة التحكم بالإنجليزية"
+
+msgid "Visibility"
+msgstr "الظهور"
+
+msgid "Welcome back."
+msgstr "مرحبًا بعودتك."
+
+msgid "Who the announcements are for."
+msgstr "لمن الإعلانات."
+
+msgid "Who the help is for, and where."
+msgstr "لمن المساعدة، وأين."
+
+msgid "Write the announcement in Arabic, English, or both."
+msgstr "اكتب الإعلان بالعربية أو الإنجليزية أو كليهما."
+
+msgid "You have been signed out."
+msgstr "تم تسجيل خروجك."
+
+msgid "Your login is created by the mosque administrator."
+msgstr "ينشئ مدير المسجد بيانات دخولك."
+
+msgid "Your password has been changed."
+msgstr "تم تغيير كلمة المرور."
+
+msgid "This announcement no longer exists."
+msgstr "لم يعد هذا الإعلان موجودًا."

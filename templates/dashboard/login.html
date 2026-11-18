@@ -1,0 +1,127 @@
+{% load i18n static site_extras %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{% translate "Sign in" %} — {{ SITE_NAME }}</title>
+    <meta name="theme-color" content="#062d21">
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% vstatic 'css/app.css' %}">
+    <link rel="stylesheet" href="{% vstatic 'css/dashboard.css' %}">
+</head>
+<body class="auth-body {% if LANGUAGE_BIDI %}is-rtl{% else %}is-ltr{% endif %}">
+    <div class="auth-shell">
+        <section class="auth-brand">
+            <svg class="auth-pattern" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="auth-star" width="72" height="72" patternUnits="userSpaceOnUse">
+                        <g fill="none" stroke="#c9a227" stroke-width="1" opacity=".22">
+                            <rect x="18" y="18" width="36" height="36"/>
+                            <rect x="18" y="18" width="36" height="36" transform="rotate(45 36 36)"/>
+                        </g>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#auth-star)"/>
+            </svg>
+
+            <a class="auth-brand-link" href="{% url 'announcements:home' %}">
+                <span class="auth-brand-mark">{% icon "mosque" %}</span>
+                <span>
+                    <span class="auth-brand-name">{{ SITE_NAME }}</span>
+                    <span class="auth-brand-tagline">{{ SITE_TAGLINE }}</span>
+                </span>
+            </a>
+
+            <div class="auth-brand-copy">
+                <h1>{% translate "Mosque dashboard" %}</h1>
+                <p>{% translate "Publish the needs of people and of the mosque, follow the fundraising, and keep the community informed." %}</p>
+                <ul class="auth-points">
+                    <li>{% icon "check" %}<span>{% translate "Publish a need in a few minutes" %}</span></li>
+                    <li>{% icon "check" %}<span>{% translate "Arabic and English in one form" %}</span></li>
+                    <li>{% icon "check" %}<span>{% translate "Update the progress of each fundraiser" %}</span></li>
+                </ul>
+            </div>
+
+            <p class="auth-brand-foot">{% translate "Trust and discretion, at the service of the community." %}</p>
+        </section>
+
+        <section class="auth-panel">
+            <div class="auth-panel-top">
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% if CURRENT_LANGUAGE == 'ar' %}
+                    <a class="dash-lang" href="{% lang_url 'en' %}" hreflang="en" lang="en">
+                        {% icon "globe" %}<span>English</span>
+                    </a>
+                {% else %}
+                    <a class="dash-lang" href="{% lang_url 'ar' %}" hreflang="ar" lang="ar">
+                        {% icon "globe" %}<span>العربية</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="auth-card">
+                <span class="auth-eyebrow">{% translate "Staff access" %}</span>
+                <h2>{% translate "Sign in" %}</h2>
+                <p class="auth-subtitle">{% translate "This area is reserved for the mosque team." %}</p>
+
+                {% if messages %}
+                    <div class="flash-stack">
+                        {% for message in messages %}
+                            <div class="flash flash-{{ message.tags }}" role="status">
+                                {% if message.tags == 'success' %}{% icon "check-circle" %}{% else %}{% icon "shield" %}{% endif %}
+                                <span>{{ message }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-alert" role="alert">
+                        {% icon "shield" %}
+                        <div>
+                            {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <form method="post" action="{% url 'dashboard:login' %}" class="auth-form" novalidate>
+                    {% csrf_token %}
+                    {% if next %}
+                        <input type="hidden" name="{{ redirect_field_name|default:'next' }}" value="{{ next }}">
+                    {% endif %}
+
+                    <div class="field{% if form.username.errors %} has-error{% endif %}">
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {{ form.username }}
+                        {% for error in form.username.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <div class="field{% if form.password.errors %} has-error{% endif %}">
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                        {{ form.password }}
+                        {% for error in form.password.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+                    </div>
+
+                    <button class="btn btn-primary auth-submit" type="submit">
+                        {% translate "Sign in" %}
+                        {% icon "arrow-right" "icon icon-flip" %}
+                    </button>
+                </form>
+
+                <p class="auth-help">{% translate "Your login is created by the mosque administrator." %}</p>
+            </div>
+
+            <p class="auth-back">
+                <a href="{% url 'announcements:home' %}">
+                    {% icon "arrow-left" "icon icon-flip" %}
+                    {% translate "Back to the public site" %}
+                </a>
+            </p>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n site_extras %}
+
+{% block title %}{% translate "Page not found" %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<div class="container error-page">
+    <span class="error-code">404</span>
+    <h1>{% translate "Page not found" %}</h1>
+    <p>{% translate "The page you are looking for does not exist or is no longer available." %}</p>
+    <div class="error-actions">
+        <a class="btn btn-primary" href="{% url 'announcements:home' %}">{% translate "Back to home" %}</a>
+        <a class="btn btn-soft" href="{% url 'announcements:list' %}">{% translate "Browse announcements" %}</a>
+    </div>
+</div>
+{% endblock %}

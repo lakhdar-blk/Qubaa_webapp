@@ -1,0 +1,59 @@
+services:
+  - type: web
+    name: qubaa
+    runtime: python
+    plan: free
+    region: frankfurt
+    buildCommand: bash build.sh
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --access-logfile - --error-logfile -
+    healthCheckPath: /healthz/
+    autoDeploy: true
+    disk:
+      # SQLite needs a persistent disk, otherwise the database is wiped on
+      # every deploy/restart. Requires a paid plan; on the free tier the data
+      # is ephemeral.
+      name: qubaa-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - key: DEBUG
+        value: "False"
+      - key: DB_PATH
+        value: /data/db.sqlite3
+      # Render generates a strong value and keeps it secret.
+      - key: SECRET_KEY
+        generateValue: true
+      # SQLite is used (DB_PATH points at the persistent disk above).
+      # Leave DATABASE_URL unset. To switch to MySQL/Postgres later,
+      # set DATABASE_URL and DB_PATH will be ignored.
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Add your Render URL here, e.g. https://qubaa.onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: ADMIN_NAME
+        value: Mosque Administrator
+      - key: SITE_NAME_AR
+        value: مسجد قباء
+      - key: SITE_NAME_EN
+        value: Qubaa Mosque
+      - key: SITE_TAGLINE_AR
+        value: في خدمة المجتمع
+      - key: SITE_TAGLINE_EN
+        value: Serving our community
+      - key: DEFAULT_CURRENCY
+        value: EUR
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: CONTACT_PHONE
+        sync: false
+      - key: CONTACT_ADDRESS_AR
+        sync: false
+      - key: CONTACT_ADDRESS_EN
+        sync: false

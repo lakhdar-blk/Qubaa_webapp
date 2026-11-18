@@ -1,0 +1,118 @@
+{% load i18n static site_extras %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{% block title %}{% translate "Dashboard" %}{% endblock %} — {{ SITE_NAME }}</title>
+    <meta name="theme-color" content="#062d21">
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% vstatic 'css/app.css' %}">
+    <link rel="stylesheet" href="{% vstatic 'css/dashboard.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="dash-body {% if LANGUAGE_BIDI %}is-rtl{% else %}is-ltr{% endif %}">
+    <a class="skip-link" href="#dash-main">{% translate "Skip to content" %}</a>
+
+    <div class="dash-shell">
+        <aside class="dash-sidebar" id="dash-sidebar" aria-label="{% translate 'Dashboard navigation' %}">
+            <a class="dash-brand" href="{% url 'dashboard:home' %}">
+                <span class="dash-brand-mark">{% icon "mosque" %}</span>
+                <span class="dash-brand-text">
+                    <span class="dash-brand-name">{{ SITE_NAME }}</span>
+                    <span class="dash-brand-tagline">{% translate "Administration" %}</span>
+                </span>
+            </a>
+
+            <nav class="dash-nav">
+                <a href="{% url 'dashboard:home' %}"{% if active == 'home' %} class="is-active" aria-current="page"{% endif %}>
+                    {% icon "grid" %}<span>{% translate "Overview" %}</span>
+                </a>
+                <a href="{% url 'dashboard:list' %}"{% if active == 'announcements' %} class="is-active" aria-current="page"{% endif %}>
+                    {% icon "megaphone" %}<span>{% translate "Announcements" %}</span>
+                </a>
+                <a href="{% url 'dashboard:create' %}"{% if active == 'create' %} class="is-active" aria-current="page"{% endif %}>
+                    {% icon "plus" %}<span>{% translate "New announcement" %}</span>
+                </a>
+
+                <span class="dash-nav-sep" role="presentation"></span>
+
+                <a href="{% url 'announcements:home' %}">
+                    {% icon "globe" %}<span>{% translate "Public site" %}</span>
+                </a>
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'admin:index' %}">
+                        {% icon "shield" %}<span>{% translate "Accounts & settings" %}</span>
+                    </a>
+                {% endif %}
+                <a href="{% url 'dashboard:password_change' %}"{% if active == 'password' %} class="is-active" aria-current="page"{% endif %}>
+                    {% icon "lock" %}<span>{% translate "Change password" %}</span>
+                </a>
+            </nav>
+
+            <div class="dash-user">
+                <span class="dash-avatar" aria-hidden="true">{{ request.user.username|first|upper }}</span>
+                <span class="dash-user-text">
+                    <span class="dash-user-name">{{ request.user.get_full_name|default:request.user.username }}</span>
+                    <span class="dash-user-mail" dir="ltr">{{ request.user.email|default:request.user.username }}</span>
+                </span>
+                <form method="post" action="{% url 'dashboard:logout' %}">
+                    {% csrf_token %}
+                    <button class="dash-logout" type="submit" title="{% translate 'Sign out' %}">
+                        {% icon "logout" %}
+                        <span class="sr-only">{% translate "Sign out" %}</span>
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <div class="dash-main">
+            <header class="dash-topbar">
+                <button class="dash-burger" type="button" aria-controls="dash-sidebar" aria-expanded="false">
+                    {% icon "menu" %}<span class="sr-only">{% translate "Menu" %}</span>
+                </button>
+
+                <div class="dash-topbar-title">{% block page_title %}{% endblock %}</div>
+
+                <div class="dash-topbar-actions">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% if CURRENT_LANGUAGE == 'ar' %}
+                        <a class="dash-lang" href="{% lang_url 'en' %}" hreflang="en" lang="en" title="{% translate 'View the dashboard in English' %}">
+                            {% icon "globe" %}<span>English</span>
+                        </a>
+                    {% else %}
+                        <a class="dash-lang" href="{% lang_url 'ar' %}" hreflang="ar" lang="ar" title="{% translate 'View the dashboard in Arabic' %}">
+                            {% icon "globe" %}<span>العربية</span>
+                        </a>
+                    {% endif %}
+                    {% block page_actions %}{% endblock %}
+                </div>
+            </header>
+
+            <div class="dash-content" id="dash-main">
+                {% if messages %}
+                    <div class="flash-stack">
+                        {% for message in messages %}
+                            <div class="flash flash-{{ message.tags }}" role="status">
+                                {% if message.tags == 'success' %}{% icon "check-circle" %}{% else %}{% icon "shield" %}{% endif %}
+                                <span>{{ message }}</span>
+                                <button class="flash-close" type="button" aria-label="{% translate 'Dismiss' %}">{% icon "close" %}</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div class="dash-overlay" hidden></div>
+
+    <script src="{% vstatic 'js/dashboard.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

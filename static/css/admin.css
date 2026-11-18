@@ -1,0 +1,63 @@
+/* Brand the Django admin to match the public site. */
+:root,
+html[data-theme="light"] {
+    --primary: #14563b;
+    --secondary: #0a3b2b;
+    --accent: #c9a227;
+    --header-bg: #0a3b2b;
+    --header-color: #f7f2e3;
+    --header-link-color: #f7f2e3;
+    --header-branding-color: #f7f2e3;
+    --breadcrumbs-bg: #14563b;
+    --breadcrumbs-fg: #e9f0ec;
+    --breadcrumbs-link-fg: #ffffff;
+    --breadcrumbs-link-hover-color: #f0dfa4;
+    --button-bg: #14563b;
+    --button-fg: #ffffff;
+    --button-hover-bg: #1c6b49;
+    --button-hover-color: #ffffff;
+    --default-button-bg: #14563b;
+    --default-button-hover-bg: #1c6b49;
+    --default-button-hover-color: #ffffff;
+    --link-fg: #14563b;
+    --link-hover-color: #1c6b49;
+    --link-selected-fg: #0a3b2b;
+    --object-tools-bg: #14563b;
+    --object-tools-hover-bg: #0a3b2b;
+    --close-button-bg: #14563b;
+    --close-button-hover-bg: #0a3b2b;
+    --delete-button-bg: #9b2c2c;
+    --delete-button-hover-bg: #7f2020;
+}
+
+#header {
+    border-bottom: 3px solid var(--accent);
+}
+
+#site-name a {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.admin-brand-mark {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-inline-end: 9px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: rotate(45deg);
+}
+
+.login #header {
+    justify-content: center;
+}
+
+.login .form-row {
+    padding-block: 10px;
+}
+
+.login .submit-row input {
+    width: 100%;
+    padding-block: 11px;
+}

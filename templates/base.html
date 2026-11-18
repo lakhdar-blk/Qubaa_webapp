@@ -1,0 +1,118 @@
+{% load i18n static site_extras %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ SITE_NAME }} — {{ SITE_TAGLINE }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% translate "Announcements of needs published by the mosque, to help people and maintain the house of Allah." %}{% endblock %}">
+    <meta name="theme-color" content="#0a3b2b">
+    <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% vstatic 'css/app.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% if LANGUAGE_BIDI %}is-rtl{% else %}is-ltr{% endif %}">
+    <a class="skip-link" href="#main">{% translate "Skip to content" %}</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="{% url 'announcements:home' %}">
+                <span class="brand-mark">{% icon "mosque" %}</span>
+                <span class="brand-text">
+                    <span class="brand-name">{{ SITE_NAME }}</span>
+                    <span class="brand-tagline">{{ SITE_TAGLINE }}</span>
+                </span>
+            </a>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+                {% icon "menu" "icon nav-toggle-open" %}
+                {% icon "close" "icon nav-toggle-close" %}
+                <span class="sr-only">{% translate "Menu" %}</span>
+            </button>
+
+            <nav id="site-nav" class="site-nav" aria-label="{% translate 'Main navigation' %}">
+                <a href="{% url 'announcements:home' %}"{% if active == 'home' %} class="is-active" aria-current="page"{% endif %}>
+                    {% translate "Home" %}
+                </a>
+                <a href="{% url 'announcements:list' %}"{% if active == 'announcements' %} class="is-active" aria-current="page"{% endif %}>
+                    {% translate "Announcements" %}
+                </a>
+                <a href="{% url 'announcements:about' %}"{% if active == 'about' %} class="is-active" aria-current="page"{% endif %}>
+                    {% translate "About us" %}
+                </a>
+            </nav>
+
+            <div class="header-actions">
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% if CURRENT_LANGUAGE == 'ar' %}
+                    <a class="lang-switch" href="{% lang_url 'en' %}" hreflang="en" lang="en" title="{% translate 'View this page in English' %}">
+                        {% icon "globe" %}<span>English</span>
+                    </a>
+                {% else %}
+                    <a class="lang-switch" href="{% lang_url 'ar' %}" hreflang="ar" lang="ar" title="{% translate 'View this page in Arabic' %}">
+                        {% icon "globe" %}<span>العربية</span>
+                    </a>
+                {% endif %}
+                <a class="btn btn-outline btn-sm admin-link" href="{% if request.user.is_staff %}{% url 'dashboard:home' %}{% else %}{% url 'dashboard:login' %}{% endif %}">
+                    {% if request.user.is_staff %}{% translate "Dashboard" %}{% else %}{% translate "Admin" %}{% endif %}
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a class="brand brand-footer" href="{% url 'announcements:home' %}">
+                    <span class="brand-mark">{% icon "mosque" %}</span>
+                    <span class="brand-text">
+                        <span class="brand-name">{{ SITE_NAME }}</span>
+                        <span class="brand-tagline">{{ SITE_TAGLINE }}</span>
+                    </span>
+                </a>
+                <p>{% translate "A mosque at the service of its community, publishing needs with discretion and trust." %}</p>
+            </div>
+
+            <div class="footer-links">
+                <h2>{% translate "Explore" %}</h2>
+                <ul>
+                    <li><a href="{% url 'announcements:home' %}">{% translate "Home" %}</a></li>
+                    <li><a href="{% url 'announcements:list' %}">{% translate "Announcements" %}</a></li>
+                    <li><a href="{% url 'announcements:about' %}">{% translate "About us" %}</a></li>
+                    <li><a href="{% if request.user.is_staff %}{% url 'dashboard:home' %}{% else %}{% url 'dashboard:login' %}{% endif %}">{% translate "Administration" %}</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h2>{% translate "Contact" %}</h2>
+                {% if CONTACT_PHONE %}
+                    <a href="tel:{{ CONTACT_PHONE }}">{% icon "phone" %}<span dir="ltr">{{ CONTACT_PHONE }}</span></a>
+                {% endif %}
+                {% if CONTACT_EMAIL %}
+                    <a href="mailto:{{ CONTACT_EMAIL }}">{% icon "mail" %}<span>{{ CONTACT_EMAIL }}</span></a>
+                {% endif %}
+                {% if CONTACT_ADDRESS %}
+                    <p class="footer-address">{% icon "map-pin" %}<span>{{ CONTACT_ADDRESS }}</span></p>
+                {% endif %}
+                {% if not CONTACT_PHONE and not CONTACT_EMAIL and not CONTACT_ADDRESS %}
+                    <p class="footer-address">{% translate "Contact details will be published soon." %}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© {{ CURRENT_YEAR }} {{ SITE_NAME }}. {% translate "All rights reserved." %}</p>
+            <p>{% translate "Built with care for the community." %}</p>
+        </div>
+    </footer>
+
+    <script src="{% vstatic 'js/app.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

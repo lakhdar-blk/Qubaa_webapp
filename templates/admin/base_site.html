@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Qubaa Mosque') }}{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <span class="admin-brand-mark" aria-hidden="true"></span>
+        {{ site_header|default:_('Qubaa Mosque Administration') }}
+    </a>
+</div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

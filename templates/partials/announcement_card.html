@@ -1,0 +1,51 @@
+{% load i18n humanize site_extras %}
+<article class="card">
+    <a class="card-media" href="{% url 'announcements:detail' announcement.pk %}" tabindex="-1" aria-hidden="true">
+        {% if announcement.image_url %}
+            <img src="{{ announcement.image_url }}" alt="" loading="lazy">
+        {% else %}
+            <span class="card-media-placeholder">
+                {% if announcement.type == 'mosque' %}{% icon "mosque" %}{% else %}{% icon "heart" %}{% endif %}
+            </span>
+        {% endif %}
+        <span class="badge badge-type">
+            {% if announcement.type == 'mosque' %}{% icon "mosque" %}{% else %}{% icon "heart" %}{% endif %}
+            {{ announcement.get_type_display }}
+        </span>
+        {% if announcement.status != 'open' %}
+            <span class="badge badge-status badge-{{ announcement.status }}">{{ announcement.get_status_display }}</span>
+        {% endif %}
+    </a>
+
+    <div class="card-body">
+        <span class="badge badge-category">{{ announcement.get_category_display }}</span>
+        <h3 class="card-title">
+            <a href="{% url 'announcements:detail' announcement.pk %}">{{ announcement.title }}</a>
+        </h3>
+        <p class="card-text">{{ announcement.description|truncatechars:140 }}</p>
+
+        <div class="card-meta">
+            {% if announcement.location %}
+                <span>{% icon "map-pin" %}{{ announcement.location }}</span>
+            {% endif %}
+            <span>{% icon "calendar" %}{{ announcement.created_at|date:"j M Y" }}</span>
+        </div>
+
+        {% if announcement.has_goal %}
+            <div class="card-progress">
+                <div class="progress" role="img" aria-label="{% translate 'Progress' %}: {{ announcement.progress_percent }}%">
+                    <span class="progress-bar" style="width: {{ announcement.progress_percent }}%"></span>
+                </div>
+                <div class="progress-meta">
+                    <span dir="ltr">{{ announcement.raised_amount|money }} / {{ announcement.goal_amount|money }} {{ announcement.currency }}</span>
+                    <span dir="ltr">{{ announcement.progress_percent }}%</span>
+                </div>
+            </div>
+        {% else %}
+            <div class="card-foot">
+                <span class="muted">{% translate "No amount requested" %}</span>
+                <span class="card-more">{% translate "View details" %}{% icon "arrow-right" "icon icon-flip" %}</span>
+            </div>
+        {% endif %}
+    </div>
+</article>

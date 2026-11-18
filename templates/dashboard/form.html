@@ -1,0 +1,183 @@
+{% extends "dashboard/base.html" %}
+{% load i18n site_extras %}
+
+{% block title %}{% if is_create %}{% translate "New announcement" %}{% else %}{% translate "Edit announcement" %}{% endif %}{% endblock %}
+{% block page_title %}{% if is_create %}{% translate "New announcement" %}{% else %}{% translate "Edit announcement" %}{% endif %}{% endblock %}
+
+{% block page_actions %}
+    {% if not is_create and announcement.is_published %}
+        <a class="btn btn-soft btn-sm topbar-link" href="{{ announcement.get_absolute_url }}" target="_blank" rel="noopener" aria-label="{% translate 'View on the public site' %}">
+            {% icon "external" %}<span>{% translate "View on the public site" %}</span>
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{% url 'dashboard:list' %}">
+    {% icon "arrow-left" "icon icon-flip" %}
+    {% translate "Back to announcements" %}
+</a>
+
+{% if form.non_field_errors %}
+    <div class="form-alert" role="alert">
+        {% icon "shield" %}
+        <div>
+            {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<form class="announcement-form" method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+
+    <section class="panel form-panel">
+        <header class="panel-head">
+            <div>
+                <h2>{% translate "Content" %}</h2>
+                <p class="panel-sub">{% translate "Write the announcement in Arabic, English, or both." %}</p>
+            </div>
+            {% icon "megaphone" %}
+        </header>
+
+        <div class="form-grid three">
+            {% include "dashboard/partials/field.html" with field=form.type %}
+            {% include "dashboard/partials/field.html" with field=form.category %}
+            {% include "dashboard/partials/field.html" with field=form.status %}
+        </div>
+
+        <div class="form-grid two">
+            {% include "dashboard/partials/field.html" with field=form.title_ar %}
+            {% include "dashboard/partials/field.html" with field=form.title_en %}
+        </div>
+
+        <div class="form-grid two">
+            {% include "dashboard/partials/field.html" with field=form.description_ar %}
+            {% include "dashboard/partials/field.html" with field=form.description_en %}
+        </div>
+    </section>
+
+    <div class="form-columns">
+        <section class="panel form-panel">
+            <header class="panel-head">
+                <div>
+                    <h2>{% translate "Beneficiary & location" %}</h2>
+                    <p class="panel-sub">{% translate "Who the help is for, and where." %}</p>
+                </div>
+                {% icon "map-pin" %}
+            </header>
+
+            <div class="form-grid">
+                {% include "dashboard/partials/field.html" with field=form.beneficiary_name %}
+            </div>
+            <div class="form-grid two">
+                {% include "dashboard/partials/field.html" with field=form.city %}
+                {% include "dashboard/partials/field.html" with field=form.country %}
+            </div>
+        </section>
+
+        <section class="panel form-panel">
+            <header class="panel-head">
+                <div>
+                    <h2>{% translate "Fundraising" %}</h2>
+                    <p class="panel-sub">{% translate "Leave the goal empty if no amount is needed." %}</p>
+                </div>
+                {% icon "wallet" %}
+            </header>
+
+            <div class="form-grid two">
+                {% include "dashboard/partials/field.html" with field=form.goal_amount %}
+                {% include "dashboard/partials/field.html" with field=form.raised_amount %}
+            </div>
+            <div class="form-grid">
+                {% include "dashboard/partials/field.html" with field=form.currency %}
+            </div>
+        </section>
+    </div>
+
+    <section class="panel form-panel">
+        <header class="panel-head">
+            <div>
+                <h2>{% translate "Image" %}</h2>
+                <p class="panel-sub">{% translate "Paste a link to a photo hosted elsewhere (no upload needed)." %}</p>
+            </div>
+            {% icon "image" %}
+        </header>
+
+        <div class="image-field">
+            {% include "dashboard/partials/field.html" with field=form.image_url %}
+            <div class="image-preview" data-image-preview hidden>
+                <img alt="" data-image-preview-img>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel form-panel">
+        <header class="panel-head">
+            <div>
+                <h2>{% translate "Contact" %}</h2>
+                <p class="panel-sub">{% translate "Shown on the announcement page. Empty fields fall back to the mosque contact details." %}</p>
+            </div>
+            {% icon "phone" %}
+        </header>
+
+        <div class="form-grid two">
+            {% include "dashboard/partials/field.html" with field=form.contact_name %}
+            {% include "dashboard/partials/field.html" with field=form.contact_phone %}
+        </div>
+        <div class="form-grid two">
+            {% include "dashboard/partials/field.html" with field=form.contact_email %}
+            {% include "dashboard/partials/field.html" with field=form.contact_address %}
+        </div>
+    </section>
+
+    <section class="panel form-panel">
+        <header class="panel-head">
+            <div>
+                <h2>{% translate "Publication" %}</h2>
+                <p class="panel-sub">{% translate "Drafts stay private until you publish them." %}</p>
+            </div>
+            {% icon "eye" %}
+        </header>
+
+        <label class="switch">
+            {{ form.is_published }}
+            <span class="switch-text">
+                <span class="switch-title">{% translate "Publish on the public site" %}</span>
+                <span class="switch-help">{% translate "Uncheck to keep this announcement as a draft." %}</span>
+            </span>
+        </label>
+    </section>
+
+    <div class="form-actions">
+        <div class="form-actions-main">
+            <button class="btn btn-primary" type="submit">
+                {% icon "check" %}<span>{% translate "Save" %}</span>
+            </button>
+            <button class="btn btn-soft" type="submit" name="_add_another" value="1">
+                {% translate "Save and add another" %}
+            </button>
+            <a class="btn btn-outline" href="{% url 'dashboard:list' %}">{% translate "Cancel" %}</a>
+        </div>
+        {% if not is_create %}
+            <span class="form-meta">
+                {% translate "Last update" %}: {{ announcement.updated_at|date:"j F Y, H:i" }}
+            </span>
+        {% endif %}
+    </div>
+</form>
+
+{% if not is_create and request.user.is_superuser %}
+    <section class="panel danger-zone">
+        <div>
+            <h2>{% translate "Delete this announcement" %}</h2>
+            <p>{% translate "This action is permanent and removes the announcement from the public site." %}</p>
+        </div>
+        <form method="post" action="{% url 'dashboard:delete' announcement.pk %}" data-confirm="{% translate 'Delete this announcement? This cannot be undone.' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm" type="submit">
+                {% icon "trash" %}<span>{% translate "Delete" %}</span>
+            </button>
+        </form>
+    </section>
+{% endif %}
+{% endblock %}

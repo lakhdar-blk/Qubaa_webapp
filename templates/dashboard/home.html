@@ -1,0 +1,162 @@
+{% extends "dashboard/base.html" %}
+{% load i18n humanize site_extras %}
+
+{% block title %}{% translate "Overview" %}{% endblock %}
+{% block page_title %}{% translate "Overview" %}{% endblock %}
+
+{% block page_actions %}
+    <a class="btn btn-primary btn-sm" href="{% url 'dashboard:create' %}">
+        {% icon "plus" %}<span>{% translate "New announcement" %}</span>
+    </a>
+{% endblock %}
+
+{% block content %}
+<div class="stat-grid">
+    <div class="stat-card">
+        <span class="stat-icon">{% icon "megaphone" %}</span>
+        <span class="stat-body">
+            <span class="stat-value">{{ stats.total }}</span>
+            <span class="stat-label">{% translate "All announcements" %}</span>
+        </span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon stat-icon-green">{% icon "eye" %}</span>
+        <span class="stat-body">
+            <span class="stat-value">{{ stats.published }}</span>
+            <span class="stat-label">{% translate "Published" %}</span>
+        </span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon stat-icon-gold">{% icon "pencil" %}</span>
+        <span class="stat-body">
+            <span class="stat-value">{{ stats.drafts }}</span>
+            <span class="stat-label">{% translate "Drafts" %}</span>
+        </span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon stat-icon-blue">{% icon "heart" %}</span>
+        <span class="stat-body">
+            <span class="stat-value">{{ stats.open }}</span>
+            <span class="stat-label">{% translate "Still open" %}</span>
+        </span>
+    </div>
+</div>
+
+<div class="dash-grid-2">
+    <section class="panel">
+        <header class="panel-head">
+            <div>
+                <h2>{% translate "Latest updates" %}</h2>
+                <p class="panel-sub">{% translate "The announcements changed most recently." %}</p>
+            </div>
+            <a class="panel-link" href="{% url 'dashboard:list' %}">
+                {% translate "View all" %}{% icon "arrow-right" "icon icon-flip" %}
+            </a>
+        </header>
+
+        {% if recent %}
+            <div class="table-wrap">
+                <table class="dash-table dash-table-compact">
+                    <thead>
+                        <tr>
+                            <th scope="col">{% translate "Announcement" %}</th>
+                            <th scope="col">{% translate "Status" %}</th>
+                            <th scope="col">{% translate "Visibility" %}</th>
+                            <th scope="col" class="col-updated">{% translate "Last update" %}</th>
+                            <th scope="col"><span class="sr-only">{% translate "Actions" %}</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for announcement in recent %}
+                            <tr>
+                                <td>
+                                    <a class="cell-title" href="{% url 'dashboard:edit' announcement.pk %}">{{ announcement.title }}</a>
+                                    <span class="cell-meta">{{ announcement.get_category_display }} · {{ announcement.get_type_display }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-status badge-{{ announcement.status }}">{{ announcement.get_status_display }}</span>
+                                </td>
+                                <td>
+                                    {% if announcement.is_published %}
+                                        <span class="badge badge-published">{% translate "Published" %}</span>
+                                    {% else %}
+                                        <span class="badge badge-draft">{% translate "Draft" %}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="cell-muted col-updated" title="{{ announcement.updated_at|date:'j F Y, H:i' }}">{{ announcement.updated_at|naturaltime }}</td>
+                                <td class="cell-actions">
+                                    <a class="icon-btn" href="{% url 'dashboard:edit' announcement.pk %}" title="{% translate 'Edit' %}">
+                                        {% icon "pencil" %}<span class="sr-only">{% translate "Edit" %}</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="empty-panel">
+                {% icon "inbox" %}
+                <h3>{% translate "No announcements yet" %}</h3>
+                <p>{% translate "Create your first announcement to show it on the public site." %}</p>
+                <a class="btn btn-primary btn-sm" href="{% url 'dashboard:create' %}">{% translate "New announcement" %}</a>
+            </div>
+        {% endif %}
+    </section>
+
+    <div class="panel-stack">
+        <section class="panel">
+            <header class="panel-head">
+                <div>
+                    <h2>{% translate "Fundraising" %}</h2>
+                    <p class="panel-sub">{% translate "Totals by currency." %}</p>
+                </div>
+                {% icon "wallet" %}
+            </header>
+
+            {% if totals %}
+                <ul class="fund-list">
+                    {% for row in totals %}
+                        <li class="fund-item">
+                            <div class="fund-head">
+                                <span class="fund-currency">{{ row.currency }}</span>
+                                <span class="fund-amount" dir="ltr">{{ row.raised|money }} / {{ row.goal|money }}</span>
+                            </div>
+                            <div class="progress">
+                                <span class="progress-bar" style="width: {% widthratio row.raised row.goal 100 %}%"></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="panel-empty">{% translate "No fundraising amounts have been recorded yet." %}</p>
+            {% endif %}
+        </section>
+
+        <section class="panel">
+            <header class="panel-head">
+                <div>
+                    <h2>{% translate "Needs by type" %}</h2>
+                    <p class="panel-sub">{% translate "Who the announcements are for." %}</p>
+                </div>
+                {% icon "users" %}
+            </header>
+
+            <ul class="type-list">
+                <li>
+                    <span class="type-label">{% icon "heart" %}{% translate "For people" %}</span>
+                    <span class="type-count">{{ stats.people }}</span>
+                </li>
+                <li>
+                    <span class="type-label">{% icon "mosque" %}{% translate "For the mosque" %}</span>
+                    <span class="type-count">{{ stats.mosque }}</span>
+                </li>
+                <li>
+                    <span class="type-label">{% icon "check-circle" %}{% translate "Fulfilled" %}</span>
+                    <span class="type-count">{{ stats.fulfilled }}</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+{% endblock %}

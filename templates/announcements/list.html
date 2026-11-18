@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load i18n site_extras %}
+
+{% block title %}{% translate "Announcements" %} — {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{% translate "Browse the needs published by the mosque and find a way to help." %}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="{% translate 'Breadcrumb' %}">
+            <a href="{% url 'announcements:home' %}">{% translate "Home" %}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{% translate "Announcements" %}</span>
+        </nav>
+        <h1>{% translate "Announcements" %}</h1>
+        <p>{% translate "Browse the needs published by the mosque and find a way to help." %}</p>
+    </div>
+</section>
+
+<div class="container page-body">
+    <form class="filter-bar" method="get" role="search">
+        <div class="filter-search">
+            <label class="sr-only" for="q">{% translate "Search" %}</label>
+            <span class="input-icon">{% icon "search" %}</span>
+            <input id="q" name="q" type="search" value="{{ query }}" placeholder="{% translate 'Search a need, a city or a name…' %}">
+        </div>
+
+        <div class="filter-select">
+            <label class="sr-only" for="type">{% translate "Type" %}</label>
+            <select id="type" name="type">
+                <option value="">{% translate "All types" %}</option>
+                {% for value, label in type_choices %}
+                    <option value="{{ value }}"{% if type_filter == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-select">
+            <label class="sr-only" for="category">{% translate "Category" %}</label>
+            <select id="category" name="category">
+                <option value="">{% translate "All categories" %}</option>
+                {% for value, label in category_choices %}
+                    <option value="{{ value }}"{% if category_filter == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="filter-select">
+            <label class="sr-only" for="status">{% translate "Status" %}</label>
+            <select id="status" name="status">
+                <option value="">{% translate "All statuses" %}</option>
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}"{% if status_filter == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-primary filter-submit" type="submit">
+            {% icon "filter" %}
+            <span>{% translate "Filter" %}</span>
+        </button>
+        {% if has_filters %}
+            <a class="btn btn-soft filter-reset" href="{% url 'announcements:list' %}">{% translate "Reset" %}</a>
+        {% endif %}
+    </form>
+
+    {% if page_obj.object_list %}
+        <div class="results-bar">
+            <p class="results-count">
+                {% blocktranslate count counter=total %}{{ counter }} announcement{% plural %}{{ counter }} announcements{% endblocktranslate %}
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            {% for announcement in page_obj %}
+                {% include "partials/announcement_card.html" %}
+            {% endfor %}
+        </div>
+
+        {% include "partials/pagination.html" %}
+    {% else %}
+        <div class="empty-state empty-state-large">
+            <span class="empty-icon">{% icon "search" %}</span>
+            <h2>{% translate "No announcements found" %}</h2>
+            <p>{% translate "Try different keywords or filters, or browse all announcements." %}</p>
+            <a class="btn btn-primary" href="{% url 'announcements:list' %}">{% translate "View all announcements" %}</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

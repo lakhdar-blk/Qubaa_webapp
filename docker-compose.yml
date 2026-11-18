@@ -1,0 +1,40 @@
+# Local MySQL for development.
+#
+# Runtime on Render is a managed Python service; this file only provides a
+# MySQL instance so you can test the exact production database engine on your
+# machine.
+#
+# Usage:
+#   docker compose up -d
+#   # then, in .env:
+#   DATABASE_URL=mysql://qubaa:qubaa@127.0.0.1:3307/qubaa?charset=utf8mb4
+#   .\.venv\Scripts\python.exe manage.py migrate
+#
+# Port 3307 is used on the host to avoid clashing with a MySQL server that may
+# already be installed on 3306.
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: qubaa-mysql
+    restart: unless-stopped
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: qubaa
+      MYSQL_USER: qubaa
+      MYSQL_PASSWORD: qubaa
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - qubaa-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  qubaa-mysql-data:

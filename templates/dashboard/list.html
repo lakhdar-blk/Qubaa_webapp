@@ -1,0 +1,192 @@
+{% extends "dashboard/base.html" %}
+{% load i18n humanize site_extras %}
+
+{% block title %}{% translate "Announcements" %}{% endblock %}
+{% block page_title %}{% translate "Announcements" %}{% endblock %}
+
+{% block page_actions %}
+    <a class="btn btn-primary btn-sm" href="{% url 'dashboard:create' %}">
+        {% icon "plus" %}<span>{% translate "New announcement" %}</span>
+    </a>
+{% endblock %}
+
+{% block content %}
+<form class="filter-bar dash-filters" method="get" role="search">
+    <div class="filter-search">
+        <label class="sr-only" for="q">{% translate "Search" %}</label>
+        <span class="input-icon">{% icon "search" %}</span>
+        <input id="q" name="q" type="search" value="{{ query }}" placeholder="{% translate 'Search a title, a city or a name…' %}">
+    </div>
+
+    <div class="filter-select">
+        <label class="sr-only" for="type">{% translate "Type" %}</label>
+        <select id="type" name="type">
+            <option value="">{% translate "All types" %}</option>
+            {% for value, label in type_choices %}
+                <option value="{{ value }}"{% if type_filter == value %} selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="filter-select">
+        <label class="sr-only" for="category">{% translate "Category" %}</label>
+        <select id="category" name="category">
+            <option value="">{% translate "All categories" %}</option>
+            {% for value, label in category_choices %}
+                <option value="{{ value }}"{% if category_filter == value %} selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="filter-select">
+        <label class="sr-only" for="status">{% translate "Status" %}</label>
+        <select id="status" name="status">
+            <option value="">{% translate "All statuses" %}</option>
+            {% for value, label in status_choices %}
+                <option value="{{ value }}"{% if status_filter == value %} selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="filter-select">
+        <label class="sr-only" for="visibility">{% translate "Visibility" %}</label>
+        <select id="visibility" name="visibility">
+            <option value="">{% translate "All announcements" %}</option>
+            <option value="published"{% if visibility == 'published' %} selected{% endif %}>{% translate "Published only" %}</option>
+            <option value="draft"{% if visibility == 'draft' %} selected{% endif %}>{% translate "Drafts only" %}</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary filter-submit" type="submit">
+        {% icon "filter" %}<span>{% translate "Filter" %}</span>
+    </button>
+    {% if has_filters %}
+        <a class="btn btn-soft filter-reset" href="{% url 'dashboard:list' %}">{% translate "Reset" %}</a>
+    {% endif %}
+</form>
+
+{% if page_obj.object_list %}
+    <div class="list-head">
+        <p class="results-count">
+            {% blocktranslate count counter=total %}{{ counter }} announcement{% plural %}{{ counter }} announcements{% endblocktranslate %}
+        </p>
+    </div>
+
+    <form id="bulk-form" class="bulk-bar" method="post" action="{% url 'dashboard:bulk_action' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <label class="bulk-check">
+            <input type="checkbox" data-select-all>
+            <span>{% translate "Select all" %}</span>
+        </label>
+        <div class="bulk-controls">
+            <label class="sr-only" for="bulk-action">{% translate "Action" %}</label>
+            <select id="bulk-action" name="action" class="input input-sm">
+                <option value="">{% translate "Choose an action" %}</option>
+                <option value="publish">{% translate "Publish" %}</option>
+                <option value="hide">{% translate "Hide from the public site" %}</option>
+                <option value="fulfil">{% translate "Mark as fulfilled" %}</option>
+                <option value="open">{% translate "Mark as open" %}</option>
+            </select>
+            <button class="btn btn-soft btn-sm" type="submit">{% translate "Apply" %}</button>
+        </div>
+    </form>
+
+    <section class="panel panel-table">
+        <div class="table-wrap">
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-check"><span class="sr-only">{% translate "Select" %}</span></th>
+                        <th scope="col">{% translate "Announcement" %}</th>
+                        <th scope="col" class="col-status">{% translate "Status" %}</th>
+                        <th scope="col" class="col-visibility">{% translate "Visibility" %}</th>
+                        <th scope="col" class="col-progress">{% translate "Progress" %}</th>
+                        <th scope="col" class="col-updated">{% translate "Last update" %}</th>
+                        <th scope="col"><span class="sr-only">{% translate "Actions" %}</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for announcement in page_obj %}
+                        <tr>
+                            <td class="col-check">
+                                <input type="checkbox" name="selected" value="{{ announcement.pk }}" form="bulk-form" class="row-check" aria-label="{{ announcement.title }}">
+                            </td>
+                            <td class="cell-main">
+                                <a class="cell-title" href="{% url 'dashboard:edit' announcement.pk %}">{{ announcement.title }}</a>
+                                <span class="cell-meta">{{ announcement.get_category_display }} · {{ announcement.get_type_display }}{% if announcement.location %} · {{ announcement.location }}{% endif %}</span>
+                            </td>
+                            <td class="cell-status">
+                                <span class="badge badge-status badge-{{ announcement.status }}">{{ announcement.get_status_display }}</span>
+                            </td>
+                            <td class="cell-visibility">
+                                {% if announcement.is_published %}
+                                    <span class="badge badge-published">{% translate "Published" %}</span>
+                                {% else %}
+                                    <span class="badge badge-draft">{% translate "Draft" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="cell-progress">
+                                {% if announcement.has_goal %}
+                                    <div class="mini-progress">
+                                        <span class="mini-progress-text" dir="ltr">{{ announcement.raised_amount|money }} / {{ announcement.goal_amount|money }} {{ announcement.currency }}</span>
+                                        <div class="progress progress-sm">
+                                            <span class="progress-bar" style="width: {{ announcement.progress_percent }}%"></span>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <span class="cell-muted">{% translate "No amount requested" %}</span>
+                                {% endif %}
+                            </td>
+                            <td class="cell-muted cell-updated" title="{{ announcement.updated_at|date:'j F Y, H:i' }}">{{ announcement.updated_at|naturaltime }}</td>
+                            <td class="cell-actions">
+                                <a class="icon-btn" href="{% url 'dashboard:edit' announcement.pk %}" title="{% translate 'Edit' %}">
+                                    {% icon "pencil" %}<span class="sr-only">{% translate "Edit" %}</span>
+                                </a>
+
+                                {% if announcement.is_published %}
+                                    <a class="icon-btn" href="{{ announcement.get_absolute_url }}" target="_blank" rel="noopener" title="{% translate 'View on the public site' %}">
+                                        {% icon "external" %}<span class="sr-only">{% translate "View on the public site" %}</span>
+                                    </a>
+                                {% endif %}
+
+                                <form class="inline-form" method="post" action="{% url 'dashboard:toggle_publish' announcement.pk %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                    <button class="icon-btn{% if announcement.is_published %} is-on{% endif %}" type="submit" title="{% if announcement.is_published %}{% translate 'Hide from the public site' %}{% else %}{% translate 'Publish' %}{% endif %}">
+                                        {% icon "eye" %}<span class="sr-only">{% if announcement.is_published %}{% translate "Hide from the public site" %}{% else %}{% translate "Publish" %}{% endif %}</span>
+                                    </button>
+                                </form>
+
+                                {% if request.user.is_superuser %}
+                                    <form class="inline-form" method="post" action="{% url 'dashboard:delete' announcement.pk %}" data-confirm="{% translate 'Delete this announcement? This cannot be undone.' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                        <button class="icon-btn icon-btn-danger" type="submit" title="{% translate 'Delete' %}">
+                                            {% icon "trash" %}<span class="sr-only">{% translate "Delete" %}</span>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    {% include "dashboard/partials/pagination.html" %}
+{% else %}
+    <div class="panel empty-panel">
+        {% icon "search" %}
+        <h2>{% translate "No announcements found" %}</h2>
+        <p>{% translate "Try different keywords or filters, or create a new announcement." %}</p>
+        <div class="empty-actions">
+            <a class="btn btn-primary btn-sm" href="{% url 'dashboard:create' %}">{% translate "New announcement" %}</a>
+            {% if has_filters %}
+                <a class="btn btn-soft btn-sm" href="{% url 'dashboard:list' %}">{% translate "Reset filters" %}</a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load i18n site_extras %}
+
+{% block title %}{% translate "About us" %} — {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{% translate "Learn about the mosque, its mission and how it publishes needs to serve the community." %}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="{% translate 'Breadcrumb' %}">
+            <a href="{% url 'announcements:home' %}">{% translate "Home" %}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{% translate "About us" %}</span>
+        </nav>
+        <h1>{% translate "About the mosque" %}</h1>
+        <p>{% translate "A house of Allah, at the service of people." %}</p>
+    </div>
+</section>
+
+<div class="container page-body">
+    <div class="about-grid">
+        <div class="about-main">
+            <h2>{% translate "Our mission" %}</h2>
+            <p>{% translate "Our mosque is a place of prayer, learning and mutual support. Following the teachings of Islam, we believe that helping one another is part of our faith and our duty towards the community." %}</p>
+            <p>{% translate "This website gives the mosque a simple and transparent way to publish the needs of people and of the house of Allah. Each announcement is reviewed by our team before publication, so that visitors can trust the information they read." %}</p>
+
+            <h2>{% translate "What we publish" %}</h2>
+            <p>{% translate "Announcements may concern a family in need, a sick person, a student, an orphan, or the maintenance of the mosque itself. Every request is published with the consent of the people concerned and with the greatest discretion." %}</p>
+
+            <h2>{% translate "How to help" %}</h2>
+            <p>{% translate "Browse the announcements, choose a need that touches you, and contact the mosque directly by phone or email. Our team will guide you and connect you with the beneficiary in a safe and respectful way." %}</p>
+            <p class="muted">{% translate "The mosque does not collect payments through this website. All help is arranged directly with the mosque." %}</p>
+
+            <div class="notice">
+                {% icon "shield" %}
+                <p>{% translate "Trust and discretion guide every announcement we publish. The dignity of the people we help always comes first." %}</p>
+            </div>
+        </div>
+
+        <aside class="detail-aside">
+            <div class="aside-card">
+                <h2>{% translate "Our values" %}</h2>
+                <ul class="values-list">
+                    <li>
+                        <span class="value-icon">{% icon "shield" %}</span>
+                        <span>
+                            <strong>{% translate "Trust" %}</strong>
+                            <span>{% translate "Each request is verified before publication." %}</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="value-icon">{% icon "eye" %}</span>
+                        <span>
+                            <strong>{% translate "Discretion" %}</strong>
+                            <span>{% translate "We protect the dignity and privacy of beneficiaries." %}</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="value-icon">{% icon "heart" %}</span>
+                        <span>
+                            <strong>{% translate "Solidarity" %}</strong>
+                            <span>{% translate "Helping one another is at the heart of our community." %}</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="aside-card contact-card">
+                <h2>{% translate "Get in touch" %}</h2>
+                <p class="muted">{% translate "The mosque team is available to listen and to help." %}</p>
+                {% if CONTACT_PHONE %}
+                    <a class="contact-line" href="tel:{{ CONTACT_PHONE }}">{% icon "phone" %}<span dir="ltr">{{ CONTACT_PHONE }}</span></a>
+                {% endif %}
+                {% if CONTACT_EMAIL %}
+                    <a class="contact-line" href="mailto:{{ CONTACT_EMAIL }}">{% icon "mail" %}<span>{{ CONTACT_EMAIL }}</span></a>
+                {% endif %}
+                {% if CONTACT_ADDRESS %}
+                    <p class="contact-line">{% icon "map-pin" %}<span>{{ CONTACT_ADDRESS }}</span></p>
+                {% endif %}
+                {% if not CONTACT_PHONE and not CONTACT_EMAIL and not CONTACT_ADDRESS %}
+                    <p class="muted">{% translate "Contact details will be published soon." %}</p>
+                {% endif %}
+            </div>
+        </aside>
+    </div>
+</div>
+{% endblock %}

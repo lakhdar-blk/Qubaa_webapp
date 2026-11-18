@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load i18n site_extras %}
+
+{% block title %}{{ announcement.title }} — {{ SITE_NAME }}{% endblock %}
+{% block meta_description %}{{ announcement.description|truncatechars:155 }}{% endblock %}
+
+{% block content %}
+<section class="detail-head">
+    <div class="container">
+        <nav class="breadcrumb" aria-label="{% translate 'Breadcrumb' %}">
+            <a href="{% url 'announcements:home' %}">{% translate "Home" %}</a>
+            <span aria-hidden="true">/</span>
+            <a href="{% url 'announcements:list' %}">{% translate "Announcements" %}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{{ announcement.title|truncatechars:50 }}</span>
+        </nav>
+
+        <div class="detail-badges">
+            <span class="badge badge-type">
+                {% if announcement.type == 'mosque' %}{% icon "mosque" %}{% else %}{% icon "heart" %}{% endif %}
+                {{ announcement.get_type_display }}
+            </span>
+            <span class="badge badge-category">{{ announcement.get_category_display }}</span>
+            <span class="badge badge-status badge-{{ announcement.status }}">{{ announcement.get_status_display }}</span>
+        </div>
+
+        <h1>{{ announcement.title }}</h1>
+
+        <div class="detail-meta">
+            {% if announcement.location %}
+                <span>{% icon "map-pin" %}{{ announcement.location }}</span>
+            {% endif %}
+            <span>{% icon "calendar" %}{% translate "Published on" %} {{ announcement.created_at|date:"j F Y" }}</span>
+            {% if announcement.beneficiary_name %}
+                <span>{% icon "users" %}{{ announcement.beneficiary_name }}</span>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<div class="container page-body">
+    <div class="detail-grid">
+        <article class="detail-main">
+            {% if announcement.image_url %}
+                <figure class="detail-image">
+                    <img src="{{ announcement.image_url }}" alt="{{ announcement.title }}" loading="lazy">
+                </figure>
+            {% endif %}
+
+            <div class="prose">
+                {{ announcement.description|linebreaks }}
+            </div>
+
+            {% if announcement.has_goal %}
+                <div class="detail-progress">
+                    <div class="detail-progress-head">
+                        <span>{% translate "Progress" %}</span>
+                        <strong>{{ announcement.progress_percent }}%</strong>
+                    </div>
+                    <div class="progress progress-lg" role="img" aria-label="{% translate 'Progress' %}: {{ announcement.progress_percent }}%">
+                        <span class="progress-bar" style="width: {{ announcement.progress_percent }}%"></span>
+                    </div>
+                    <div class="detail-progress-meta">
+                        <span>{% translate "Raised" %}: <strong dir="ltr">{{ announcement.raised_amount|money }} {{ announcement.currency }}</strong></span>
+                        <span>{% translate "Goal" %}: <strong dir="ltr">{{ announcement.goal_amount|money }} {{ announcement.currency }}</strong></span>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="notice">
+                {% icon "shield" %}
+                <p>{% translate "Every announcement is published and verified by the mosque. The mosque does not collect payments online: please contact us directly to offer your help." %}</p>
+            </div>
+
+            <a class="back-link" href="{% url 'announcements:list' %}">
+                {% icon "arrow-left" "icon icon-flip" %}
+                {% translate "Back to announcements" %}
+            </a>
+        </article>
+
+        <aside class="detail-aside">
+            <div class="aside-card">
+                <h2>{% translate "Summary" %}</h2>
+                <dl class="detail-list">
+                    <div>
+                        <dt>{% translate "Type" %}</dt>
+                        <dd>{{ announcement.get_type_display }}</dd>
+                    </div>
+                    <div>
+                        <dt>{% translate "Category" %}</dt>
+                        <dd>{{ announcement.get_category_display }}</dd>
+                    </div>
+                    {% if announcement.beneficiary_name %}
+                        <div>
+                            <dt>{% translate "Beneficiary" %}</dt>
+                            <dd>{{ announcement.beneficiary_name }}</dd>
+                        </div>
+                    {% endif %}
+                    {% if announcement.location %}
+                        <div>
+                            <dt>{% translate "Location" %}</dt>
+                            <dd>{{ announcement.location }}</dd>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <dt>{% translate "Status" %}</dt>
+                        <dd><span class="badge badge-status badge-{{ announcement.status }}">{{ announcement.get_status_display }}</span></dd>
+                    </div>
+                </dl>
+            </div>
+
+            {% if announcement.has_goal %}
+                <div class="aside-card">
+                    <h2>{% translate "Fundraising" %}</h2>
+                    <div class="fund-row">
+                        <span>{% translate "Goal" %}</span>
+                        <strong dir="ltr">{{ announcement.goal_amount|money }} {{ announcement.currency }}</strong>
+                    </div>
+                    <div class="fund-row">
+                        <span>{% translate "Raised" %}</span>
+                        <strong class="text-green" dir="ltr">{{ announcement.raised_amount|money }} {{ announcement.currency }}</strong>
+                    </div>
+                    <div class="fund-row">
+                        <span>{% translate "Remaining" %}</span>
+                        <strong dir="ltr">{{ announcement.remaining_amount|money }} {{ announcement.currency }}</strong>
+                    </div>
+                    <div class="progress">
+                        <span class="progress-bar" style="width: {{ announcement.progress_percent }}%"></span>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="aside-card contact-card">
+                <h2>{% translate "Contact the mosque" %}</h2>
+                <p class="muted">{% translate "For any question or to offer help, contact us directly." %}</p>
+
+                {% if announcement.contact_name %}
+                    <p class="contact-name">{{ announcement.contact_name }}</p>
+                {% endif %}
+
+                {% if announcement.contact_phone %}
+                    <a class="contact-line" href="tel:{{ announcement.contact_phone }}">
+                        {% icon "phone" %}<span dir="ltr">{{ announcement.contact_phone }}</span>
+                    </a>
+                {% elif CONTACT_PHONE %}
+                    <a class="contact-line" href="tel:{{ CONTACT_PHONE }}">
+                        {% icon "phone" %}<span dir="ltr">{{ CONTACT_PHONE }}</span>
+                    </a>
+                {% endif %}
+
+                {% if announcement.contact_email %}
+                    <a class="contact-line" href="mailto:{{ announcement.contact_email }}">
+                        {% icon "mail" %}<span>{{ announcement.contact_email }}</span>
+                    </a>
+                {% elif CONTACT_EMAIL %}
+                    <a class="contact-line" href="mailto:{{ CONTACT_EMAIL }}">
+                        {% icon "mail" %}<span>{{ CONTACT_EMAIL }}</span>
+                    </a>
+                {% endif %}
+
+                {% if announcement.contact_address %}
+                    <p class="contact-line">
+                        {% icon "map-pin" %}<span>{{ announcement.contact_address }}</span>
+                    </p>
+                {% elif CONTACT_ADDRESS %}
+                    <p class="contact-line">
+                        {% icon "map-pin" %}<span>{{ CONTACT_ADDRESS }}</span>
+                    </p>
+                {% endif %}
+
+                {% if not announcement.contact_phone and not announcement.contact_email and not CONTACT_PHONE and not CONTACT_EMAIL and not announcement.contact_address and not CONTACT_ADDRESS %}
+                    <p class="muted">{% translate "Contact details are not available yet." %}</p>
+                {% endif %}
+            </div>
+
+            <div class="aside-card">
+                <h2>{% translate "Share this announcement" %}</h2>
+                {% with share_url=request.build_absolute_uri %}
+                    <div class="share-buttons">
+                        <button class="btn btn-soft btn-sm" type="button" data-copy-link data-copy-url="{{ share_url }}" data-copied-label="{% translate 'Copied!' %}">
+                            {% icon "copy" %}<span>{% translate "Copy link" %}</span>
+                        </button>
+                        <a class="btn btn-soft btn-sm" href="https://wa.me/?text={{ announcement.title|urlencode }}%20{{ share_url|urlencode }}" target="_blank" rel="noopener noreferrer">
+                            {% icon "share" %}<span>WhatsApp</span>
+                        </a>
+                        <a class="btn btn-soft btn-sm" href="https://www.facebook.com/sharer/sharer.php?u={{ share_url|urlencode }}" target="_blank" rel="noopener noreferrer">
+                            {% icon "share" %}<span>Facebook</span>
+                        </a>
+                    </div>
+                {% endwith %}
+            </div>
+        </aside>
+    </div>
+
+    {% if related %}
+        <section class="related">
+            <div class="section-head">
+                <div>
+                    <span class="eyebrow-dark">{% translate "You may also help" %}</span>
+                    <h2>{% translate "Other announcements" %}</h2>
+                </div>
+                <a class="link-more" href="{% url 'announcements:list' %}">
+                    {% translate "View all announcements" %}
+                    {% icon "arrow-right" "icon icon-flip" %}
+                </a>
+            </div>
+            <div class="cards-grid">
+                {% for announcement in related %}
+                    {% include "partials/announcement_card.html" %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}
